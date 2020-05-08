@@ -1,18 +1,16 @@
 package Control;
 
-import State.Player;
-import State.StoreData;
+import Model.Player;
+import Model.StoreData;
 import View.Scene1;
 import View.Scene2;
 import View.Scene4;
-import View.Scene2;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import State.TurnSet;
+import Model.TurnSet;
 import org.tinylog.Logger;
 
 import java.time.LocalDate;

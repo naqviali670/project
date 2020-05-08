@@ -1,8 +1,7 @@
 package Control;
 
-import State.Game;
-import State.Player;
-import State.StoreData;
+import Model.Game;
+import Model.Player;
 import javafx.scene.control.TextField;
 
 public class PlayerAndGameCreator {

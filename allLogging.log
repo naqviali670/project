@@ -1,6 +1,52 @@
-2020-05-08 14:40:48 [JavaFX Application Thread] State.Player.<init>()
+2020-05-08 15:48:30 [JavaFX Application Thread] Model.Player.<init>()
 INFO: kausar has X assigned name
-2020-05-08 14:40:48 [JavaFX Application Thread] State.Player.<init>()
-INFO: ali has O assigned nameG
-2020-05-08 14:40:48 [JavaFX Application Thread] Control.ButtonFunctions.handle()
+2020-05-08 15:48:30 [JavaFX Application Thread] Model.Player.<init>()
+INFO: ali has O assigned name
+2020-05-08 15:48:30 [JavaFX Application Thread] Control.ButtonFunctions.handle()
 INFO: Players are ready for action!
+2020-05-08 15:48:32 [JavaFX Application Thread] Control.ButtonFunctions.handle()
+INFO: kausar's turn
+2020-05-08 15:48:33 [JavaFX Application Thread] Control.ButtonFunctions.handle()
+INFO: ali's turn
+2020-05-08 15:48:34 [JavaFX Application Thread] Control.ButtonFunctions.handle()
+INFO: kausar's turn
+2020-05-08 15:48:35 [JavaFX Application Thread] Control.ButtonFunctions.handle()
+INFO: ali's turn
+2020-05-08 15:48:35 [JavaFX Application Thread] Control.ButtonFunctions.handle()
+WARN: The cell is already filled. Please try a different one!
+2020-05-08 15:48:36 [JavaFX Application Thread] Control.ButtonFunctions.handle()
+INFO: kausar's turn
+2020-05-08 15:48:36 [JavaFX Application Thread] Control.ButtonFunctions.handle()
+INFO: ali's turn
+2020-05-08 15:48:37 [JavaFX Application Thread] Control.ButtonFunctions.handle()
+INFO: kausar's turn
+2020-05-08 15:48:37 [JavaFX Application Thread] Control.ButtonFunctions.handle()
+INFO: ali's turn
+2020-05-08 15:48:38 [JavaFX Application Thread] Control.ButtonFunctions.handle()
+INFO: kausar's turn
+2020-05-08 15:48:38 [JavaFX Application Thread] Control.ButtonFunctions.handle()
+INFO: ali's turn
+2020-05-08 15:48:39 [JavaFX Application Thread] Control.ButtonFunctions.handle()
+INFO: kausar's turn
+2020-05-08 15:48:40 [JavaFX Application Thread] Control.ButtonFunctions.handle()
+INFO: ali's turn
+2020-05-08 15:48:40 [JavaFX Application Thread] Control.ButtonFunctions.handle()
+INFO: kausar's turn
+2020-05-08 15:48:41 [JavaFX Application Thread] Control.ButtonFunctions.handle()
+INFO: ali's turn
+2020-05-08 15:48:41 [JavaFX Application Thread] Control.ButtonFunctions.handle()
+INFO: kausar's turn
+2020-05-08 15:48:42 [JavaFX Application Thread] Control.ButtonFunctions.handle()
+INFO: ali's turn
+2020-05-08 15:48:42 [JavaFX Application Thread] Control.ButtonFunctions.handle()
+INFO: kausar's turn
+2020-05-08 15:48:43 [JavaFX Application Thread] Control.ButtonFunctions.handle()
+INFO: ali's turn
+2020-05-08 15:48:43 [JavaFX Application Thread] Control.ButtonFunctions.handle()
+INFO: ali is the winner
+2020-05-08 15:48:43 [JavaFX Application Thread] Model.StoreData.setGame()
+INFO: Game data has been stored successfully!
+2020-05-08 15:48:44 [JavaFX Application Thread] Control.ButtonFunctions.handle()
+INFO: You are tired now!
+2020-05-08 15:48:48 [JavaFX Application Thread] Control.ButtonFunctions.handle()
+INFO: Program is finished running!

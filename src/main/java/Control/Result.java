@@ -1,8 +1,7 @@
 package Control;
 
-import State.Game;
-import State.Player;
-import State.StoreData;
+import Model.Player;
+import Model.StoreData;
 import javafx.scene.control.Label;
 
 import java.util.Collections;
