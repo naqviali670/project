@@ -1,0 +1,6 @@
+2020-05-08 14:40:48 [JavaFX Application Thread] State.Player.<init>()
+INFO: kausar has X assigned name
+2020-05-08 14:40:48 [JavaFX Application Thread] State.Player.<init>()
+INFO: ali has O assigned nameG
+2020-05-08 14:40:48 [JavaFX Application Thread] Control.ButtonFunctions.handle()
+INFO: Players are ready for action!
