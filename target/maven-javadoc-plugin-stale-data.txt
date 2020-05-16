@@ -1,0 +1,26 @@
+cmd.exe
+/X
+/C
+""C:\Program Files\Amazon Corretto\jdk11.0.4_10\bin\javadoc.exe" @options @packages"
+E:\Projects\target\site\apidocs\allclasses-index.html = 1589640257644
+E:\Projects\target\site\apidocs\allclasses.html = 1589640257672
+E:\Projects\target\site\apidocs\allpackages-index.html = 1589640257652
+E:\Projects\target\site\apidocs\constant-values.html = 1589640256911
+E:\Projects\target\site\apidocs\deprecated-list.html = 1589640257663
+E:\Projects\target\site\apidocs\element-list = 1589640256757
+E:\Projects\target\site\apidocs\help-doc.html = 1589640257699
+E:\Projects\target\site\apidocs\index-all.html = 1589640257627
+E:\Projects\target\site\apidocs\index.html = 1589640257686
+E:\Projects\target\site\apidocs\member-search-index.js = 1589640257620
+E:\Projects\target\site\apidocs\member-search-index.zip = 1589640257623
+E:\Projects\target\site\apidocs\options = 1589640248015
+E:\Projects\target\site\apidocs\overview-summary.html = 1589640257691
+E:\Projects\target\site\apidocs\overview-tree.html = 1589640257162
+E:\Projects\target\site\apidocs\package-search-index.js = 1589640257495
+E:\Projects\target\site\apidocs\package-search-index.zip = 1589640257533
+E:\Projects\target\site\apidocs\packages = 1589640248017
+E:\Projects\target\site\apidocs\script.js = 1589640257708
+E:\Projects\target\site\apidocs\search.js = 1589640257711
+E:\Projects\target\site\apidocs\stylesheet.css = 1589640257705
+E:\Projects\target\site\apidocs\type-search-index.js = 1589640257600
+E:\Projects\target\site\apidocs\type-search-index.zip = 1589640257618

@@ -1,309 +1,183 @@
 package Control;
 
-import Model.Player;
+import Model.GameRules;
+import Model.Player1;
 import Model.StoreData;
+import Model.TurnSet;
 import View.Scene1;
 import View.Scene2;
-import View.Scene4;
+import View.Scene3;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import Model.TurnSet;
 import org.tinylog.Logger;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class ButtonFunctions{
+/**
+ * ButtonFunctions represents the controller class, which has functions which controls different scenes of the game.
+ *
+ * @author Syed Kausar Ali Naqvi
+ */
+public class ButtonFunctions {
+    GameRules gr = new GameRules();
+    TurnSet ts = new TurnSet();
+    int check;
 
-
-    public static void actionGrid(Button[][] b1, int r, int c1, Stage stage)
-    {
-        int row,col;
-
-
-        row=r;
-        col=c1;
-        Button b[][] = b1;
+    /**
+     * It represents the Scene2 controller function.
+     * It calls business logic function from GameRules(model class) to set logic on each cell.
+     * It uses StoreData(model_class), calls functions of StoreData to store Game in Game table.
+     * After this, it changes second scene to first scene.
+     *
+     * @param b1    Button Array,  represents cells of the board.
+     * @param r     row number of specific cell.
+     * @param c1    column number of the specific cell.
+     * @param stage stage, created in the Scene1
+     * @param pagc  PlayerAndGameCreator object, to perform necessary functionality.
+     */
+    public void actionGrid(Button[][] b1, int r, int c1, Stage stage, PlayerAndGameCreator pagc) {
+        gr.setTurnSet(ts);
+        gr.setPlayerAndGameCreator(pagc);
+        int row, col;
+        row = r;
+        col = c1;
         EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                try
+                try {
+                    gr.GridRules(b1, r, c1); // Business logic
+                } catch (Exception e) {
+                    Alert a = new Alert(Alert.AlertType.ERROR, "Cell is already filled", ButtonType.OK);
+                    a.show();
+                }
+                if (gr.getCount() == 36) //to store data
                 {
-                    if(b[row][col].getText()=="X"||b[row][col].getText()=="O")
-                    {
-                        throw new Exception();
-                    }
+                    pagc.getGame().setPlayer1Turn(pagc.getP1().getTurns());
+                    pagc.getGame().setPlayer2Turn(pagc.getP2().getTurns());
+                    StoreData sd = new StoreData();
+                    if (ts.getTurn() == 1) {
+                        Alert a = new Alert(Alert.AlertType.INFORMATION, pagc.getP2().getName() + " is the winner", ButtonType.OK);
+                        a.showAndWait();
+                        pagc.getGame().setWinner(pagc.getP2().getName());
+                        Logger.info("{} is the winner", pagc.getP2().getName());
+                        for (Player1 p : sd.getPlayer()) {
 
-                    String c;
-                if(TurnSet.getTurn() == 1)
-                {
-                    c = "X";
-                    Logger.info("{}'s turn",PlayerAndGameCreator.getP1().getName());
-                }
-                else
-                {
-                    c = "O";
-                    Logger.info("{}'s turn",PlayerAndGameCreator.getP2().getName());
-                }
-                int count = 0;
+                            if (p.equals(pagc.getP2())) {
+                                sd.updateData(p);
 
-                if (row == 0 && col == 0) {
-                    b[row][col].setText(c);
-                    count++;
-                    if (b[row][col + 1].getText() == "") {
-                        b[row][col + 1].setText(c);
-                        count++;
-
-                    }
-
-                    if (b[row + 1][col].getText() == "") {
-                        b[row + 1][col].setText(c);
-                        count++;
-                    }
-
-                } else if (row == 0 && col == 5) {
-                    b[row][col].setText(c);
-                    count++;
-                    if (b[row][col - 1].getText() == "") {
-                        b[row][col - 1].setText(c);
-                        count++;
-                    }
-
-                    if (b[row + 1][col].getText() == "") {
-                        b[row + 1][col].setText(c);
-                        count++;
-                    }
-
-                } else if (row == 5 && col == 0) {
-                    b[row][col].setText(c);
-                    count++;
-                    if (b[row][col + 1].getText() == "") {
-                        b[row][col + 1].setText(c);
-                        count++;
-                    }
-
-                    if (b[row - 1][col].getText() == "") {
-                        b[row - 1][col].setText(c);
-                        count++;
-                    }
-
-                } else if (row == 5 && col == 5) {
-                    b[row][col].setText(c);
-                    count++;
-                    if (b[row][col - 1].getText() == "") {
-                        b[row][col - 1].setText(c);
-                        count++;
-                    }
-                    if (b[row - 1][col].getText() == "") {
-                        b[row - 1][col].setText(c);
-                        count++;
-                    }
-
-                } else if (row == 0) {
-                    b[row][col].setText(c);
-                    count++;
-                    if (b[row][col - 1].getText() == "") {
-                        b[row][col - 1].setText(c);
-                        count++;
-                    }
-
-                    if (b[row + 1][col].getText() == "") {
-                        b[row + 1][col].setText(c);
-                        count++;
-                    }
-
-                    if (b[row][col + 1].getText() == "") {
-                        b[row][col + 1].setText(c);
-                        count++;
-                    }
-
-                } else if (row == 5) {
-                    b[row][col].setText(c);
-                    count++;
-                    if (b[row][col - 1].getText() == "") {
-                        b[row][col - 1].setText(c);
-                        count++;
-                    }
-
-                    if (b[row - 1][col].getText() == "") {
-                        b[row - 1][col].setText(c);
-                        count++;
-                    }
-
-                    if (b[row][col + 1].getText() == "") {
-                        b[row][col + 1].setText(c);
-                        count++;
-                    }
-                } else if (col == 0) {
-                    b[row][col].setText(c);
-                    count++;
-                    if (b[row][col + 1].getText() == "") {
-                        b[row][col + 1].setText(c);
-                        count++;
-                    }
-                    if (b[row - 1][col].getText() == "") {
-                        b[row - 1][col].setText(c);
-                        count++;
-                    }
-
-                    if (b[row + 1][col].getText() == "") {
-                        b[row + 1][col].setText(c);
-                        count++;
-                    }
-
-                } else if (col == 5) {
-                    b[row][col].setText(c);
-                    count++;
-                    if (b[row][col - 1].getText() == "") {
-                        b[row][col - 1].setText(c);
-                        count++;
-                    }
-
-                    if (b[row - 1][col].getText() == "") {
-                        b[row - 1][col].setText(c);
-                        count++;
-                    }
-
-                    if (b[row + 1][col].getText() == "") {
-                        b[row + 1][col].setText(c);
-                        count++;
-                    }
-
-                } else {
-                    b[row][col].setText(c);
-                    count++;
-                    if (b[row][col - 1].getText() == "") {
-                        b[row][col - 1].setText(c);
-                        count++;
-                    }
-
-                    if (b[row - 1][col].getText() == "") {
-                        b[row - 1][col].setText(c);
-                        count++;
-                    }
-
-                    if (b[row + 1][col].getText() == "") {
-                        b[row + 1][col].setText(c);
-                        count++;
-                    }
-
-                    if (b[row][col + 1].getText() == "") {
-                        b[row][col + 1].setText(c);
-                        count++;
-                    }
-
-                }
-                if (TurnSet.getTurn() == 1) {
-                    TurnSet.setTurn(2);
-                    PlayerAndGameCreator.getP1().TurnCalculator(1);
-                } else {
-                    TurnSet.setTurn(1);
-                    PlayerAndGameCreator.getP2().TurnCalculator(1);
-                }
-
-                Scene2.setCount(count);
-
-                if (Scene2.getCount() == 36) {
-                    StoreData.setPlayer(PlayerAndGameCreator.getP1());
-                    StoreData.setPlayer(PlayerAndGameCreator.getP2());
-
-                    if (TurnSet.getTurn() == 1) {
-                        Logger.info("{} is the winner",PlayerAndGameCreator.getP2().getName());
-                        for (Player p : StoreData.getPlayer()) {
-                            if (p.equals(PlayerAndGameCreator.getP2())) {
-                                p.setWins(1);
-                                PlayerAndGameCreator.Winner(PlayerAndGameCreator.getP2().getName());
-                                StoreData.setGame(PlayerAndGameCreator.getGame());
+                            }
+                        }
+                    } else {
+                        Alert a = new Alert(Alert.AlertType.INFORMATION, pagc.getP1().getName() + " is the winner", ButtonType.OK);
+                        a.show();
+                        pagc.getGame().setWinner(pagc.getP1().getName());
+                        Logger.info("{} is the winner", pagc.getP1().getName());
+                        for (Player1 p : sd.getPlayer()) {
+                            if (p.equals(pagc.getP1())) {
+                                sd.updateData(p);
+                                pagc.getGame().setWinner(pagc.getP1().getName());
                             }
                         }
                     }
-                    else {
-                        Logger.info("{} is the winner",PlayerAndGameCreator.getP1().getName());
-                        for (Player p : StoreData.getPlayer()) {
-                            if (p.equals(PlayerAndGameCreator.getP1())) {
-                                p.setWins(1);
-                                PlayerAndGameCreator.Winner(PlayerAndGameCreator.getP1().getName());
-                                StoreData.setGame(PlayerAndGameCreator.getGame());
-                            }
-                        }
-                    }
-                    TurnSet.setTurn(1);
-                    Scene2.Count(0);
+                    sd.setGame(pagc.getGame());
+
+
+                    ts.setTurn(1);
                     Scene1 fx = new Scene1();
-                    System.out.println(PlayerAndGameCreator.getGame().getLt());
+
                     try {
                         fx.start(stage);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
                 }
-            }
-            catch(Exception ex)
-            {
-                Logger.warn("The cell is already filled. Please try a different one!");
-            }
             }
 
         };
-        b[row][col].addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
+        b1[row][col].addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
 
     }
-    public static void startAction(Button b , Stage stage , TextField t1 , TextField t2)
-    {
+
+    /**
+     * It represents the Scene1 controller function.
+     * It also assigns the functionality to start button in Scene1(first scene).
+     * It uses StoreData(model_class), calls functions of StoreData(model_class) to store player in Player1 table.
+     *
+     * @param b     Button, represents start button.
+     * @param stage stage, created in the Scene1.
+     * @param t1    TextField, contains the first player name.
+     * @param t2    TextField contains the second player name.
+     */
+    public void startAction(Button b, Stage stage, TextField t1, TextField t2) {
+        PlayerAndGameCreator pagc = new PlayerAndGameCreator();
         EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
-                PlayerAndGameCreator.playerCreator(t1 , t2);
-                PlayerAndGameCreator.gameCreator();
-                Logger.info("Players are ready for action!");
-                PlayerAndGameCreator.getGame().setLt(LocalTime.now());
-                PlayerAndGameCreator.getGame().setLd(LocalDate.now());
-                Scene2 s = new Scene2();
+                if (t1.getText().trim().equals("") || t2.getText().trim().equals("")) {
+                    t1.setText("");
+                    t2.setText("");
 
-                try {
-                    s.start(stage);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    Alert a = new Alert(Alert.AlertType.ERROR, "Players Names are required", ButtonType.OK);
+                    a.show();
+                    t1.requestFocus();
+                } else if (t1.getText().trim().equals(t2.getText().trim())) {
+                    Alert a = new Alert(Alert.AlertType.ERROR, "Players Names are same", ButtonType.OK);
+                    a.show();
+                    t1.requestFocus();
+                } else {
+                    pagc.playerCreator(t1.getText(), t2.getText());
+                    pagc.gameCreator();
+                    StoreData sd = new StoreData();
+                    sd.setPlayer(pagc.getP1());
+                    sd.setPlayer(pagc.getP2());
+                    Logger.info("Players are ready for action!");
+                    pagc.getGame().setLt(LocalTime.now());
+                    pagc.getGame().setLd(LocalDate.now());
+                    pagc.getGame().setPlayer1(pagc.getP1().getName());
+                    pagc.getGame().setPlayer2(pagc.getP2().getName());
+                    Scene2 s = new Scene2();
+                    s.setPlayerAndGameCreator(pagc);
+                    try {
+                        s.start(stage);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         };
         b.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
     }
-    public static void finishAction(Button b , Stage stage)
-    {
+
+    /**
+     * It changes first scene to third scene
+     * It assigns this functionality to finish button in Scene1.
+     *
+     * @param b     Button object, represents finish button
+     * @param stage stage, created in the Scene1.
+     */
+    public void finishAction(Button b, Stage stage) {
         EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                Scene4 s= new Scene4();
+                Scene3 s = new Scene3();
                 Logger.info("You are tired now!");
                 try {
-
                     s.start(stage);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
-
             }
         };
         b.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
 
-    }
-    public static void exitAction(Button b)
-    {
-        EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                Logger.info("Program is finished running!");
-                System.exit(0);
-            }
-        };
-        b.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
     }
 
 }
