@@ -1,14 +1,4 @@
-2020-05-17 13:35:07 [JavaFX Application Thread] Model.Player1.<init>()
-INFO: ads has X assigned name
-2020-05-17 13:35:07 [JavaFX Application Thread] Model.Player1.<init>()
-INFO: asdasdas has O assigned name
-2020-05-17 13:35:15 [JavaFX Application Thread] Model.StoreData.setPlayer()
-INFO: ads has been added successfully!
-2020-05-17 13:35:16 [JavaFX Application Thread] Control.ButtonFunctions.handle()
-INFO: Players are ready for action!
-2020-05-17 13:35:34 [JavaFX Application Thread] Control.GridSetUp.handle()
-INFO: asdasdas is the winner
-2020-05-17 13:35:37 [JavaFX Application Thread] Model.StoreData.updateData()
-INFO: asdasdas's wins has been updated successfully!
-2020-05-17 13:35:39 [JavaFX Application Thread] Model.StoreData.setGame()
-INFO: Game data has been stored successfully!
+2020-05-17 14:28:28 [JavaFX Application Thread] Control.ButtonFunctions.handle()
+INFO: You are tired now!
+2020-05-17 14:28:42 [JavaFX Application Thread] Control.WinnersResult.getWinners()
+INFO: Getting Top 5 winners.....!
