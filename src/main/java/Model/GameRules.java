@@ -1,8 +1,11 @@
 package Model;
 
+import Control.GridSetUp;
 import Control.PlayerAndGameCreator;
 import javafx.scene.control.Button;
 import org.tinylog.Logger;
+
+import java.util.ArrayList;
 
 /**
  * GameRules represets the model class that has the business logic of the game.
@@ -11,17 +14,30 @@ import org.tinylog.Logger;
  */
 public class GameRules {
     private PlayerAndGameCreator pagc;
-    private int count = 0;
-    TurnSet ts;
+    private GridSetUp gridSetUp;
+    private String[][] b = new String[6][6];
+    public GameRules()
+    {
+        int i=0 , j=0;
+        for(i=0; i<b.length; i++)
+        {
+            for(j=0; j<b.length; j++)
+            {
+                b[i][j] = " - ";
+            }
+        }
+    }
+    private int count = 0 , i = 0;
+    private String c = "";
+    String data = "";
+    TurnSet ts = new TurnSet();
 
     /**
      * To set TurnSet class Object inside GameRules.
      *
      * @param t TurnSet Object
      */
-    public void setTurnSet(TurnSet t) {
-        ts = t;
-    }
+
 
     /**
      * To set PlayerAndGameCreator class object inside GameRules.
@@ -50,28 +66,35 @@ public class GameRules {
         return count;
     }
 
+
+    public void setGridSet(GridSetUp gsu){
+        gridSetUp = gsu;
+    }
+    public String getCellData()
+    {
+        return c;
+    }
     /**
      * To assign rules to every cell of the board.
      *
-     * @param b  Button array
      * @param r1 row number of the button
      * @param c1 column number of the button
      * @throws Exception when player clicks the cell, that is already filled
      */
-    public void GridRules(Button[][] b, int r1, int c1) throws Exception {
-        int row = r1, col = c1;
-        boolean found = false;
-        if (b[row][col].getText() == "X" || b[row][col].getText() == "O") {
-            throw new Exception();
-        }
+    public ArrayList<Integer> GridRules(int r1, int c1){
 
-        String c = "";
+        i=0;
+        ArrayList<Integer> indexes = new ArrayList<>();
+        int row = r1, col = c1 , j=0 , k=0;
+        c = "";
+        boolean found = false;
         try {
             if (ts.getTurn() == 1) {
                 c = "X";
                 Logger.info("{}'s turn", pagc.getP1().getName());
             } else {
                 c = "O";
+
                 Logger.info("{}'s turn", pagc.getP2().getName());
             }
         } catch (NullPointerException n) {
@@ -81,148 +104,249 @@ public class GameRules {
         int count = 0;
 
         if (row == 0 && col == 0) {
-            b[row][col].setText(c);
+            b[row][col] = c;
+            indexes.add(i,row);
+            indexes.add(i+1,col);
             count++;
-            if (b[row][col + 1].getText() == "") {
-                b[row][col + 1].setText(c);
+            i=i+2;
+            if (b[row][col + 1] == " - " ) {
+                b[row][col + 1] = c;
                 count++;
-
+                indexes.add(i,row);
+                indexes.add(i+1,col+1);
+                i=i+2;
             }
 
-            if (b[row + 1][col].getText() == "") {
-                b[row + 1][col].setText(c);
+            if (b[row + 1][col] == " - ") {
+                b[row + 1][col] = c;
                 count++;
+                indexes.add(i,row+1);
+                indexes.add(i+1,col);
+                i=i+2;
             }
 
         } else if (row == 0 && col == 5) {
-            b[row][col].setText(c);
+            b[row][col] = c;
             count++;
-            if (b[row][col - 1].getText() == "") {
-                b[row][col - 1].setText(c);
+            indexes.add(i,row);
+            indexes.add(i+1,col);
+            i=i+2;
+            if (b[row][col - 1] == " - ") {
+                b[row][col - 1] = c;
                 count++;
+                indexes.add(i,row);
+                indexes.add(i+1,col-1);
+                i=i+2;
             }
 
-            if (b[row + 1][col].getText() == "") {
-                b[row + 1][col].setText(c);
+            if (b[row + 1][col] == " - ") {
+                b[row + 1][col] = c;
                 count++;
+                indexes.add(i,row+1);
+                indexes.add(i+1,col);
+                i=i+2;
             }
 
         } else if (row == 5 && col == 0) {
-            b[row][col].setText(c);
+            b[row][col] = c;
             count++;
-            if (b[row][col + 1].getText() == "") {
-                b[row][col + 1].setText(c);
+            indexes.add(i,row);
+            indexes.add(i+1,col);
+            i=i+2;
+            if (b[row][col + 1] == " - ") {
+                b[row][col + 1] = c;
                 count++;
+                indexes.add(i,row);
+                indexes.add(i+1,col+1);
+                i=i+2;
             }
 
-            if (b[row - 1][col].getText() == "") {
-                b[row - 1][col].setText(c);
+            if (b[row - 1][col] == " - ") {
+                b[row - 1][col] = c;
                 count++;
+                indexes.add(i,row-1);
+                indexes.add(i+1,col);
+                i=i+2;
             }
 
         } else if (row == 5 && col == 5) {
-            b[row][col].setText(c);
+            b[row][col] = c;
             count++;
-            if (b[row][col - 1].getText() == "") {
-                b[row][col - 1].setText(c);
+            indexes.add(i,row);
+            indexes.add(i+1,col);
+            i=i+2;
+            if (b[row][col - 1] == " - ") {
+                b[row][col - 1]=c;
                 count++;
+                indexes.add(i,row);
+                indexes.add(i+1,col-1);
+                i=i+2;
             }
-            if (b[row - 1][col].getText() == "") {
-                b[row - 1][col].setText(c);
+            if (b[row - 1][col] == " - ") {
+                b[row - 1][col]=c;
                 count++;
+                indexes.add(i,row-1);
+                indexes.add(i+1,col);
+                i=i+2;
             }
 
         } else if (row == 0) {
-            b[row][col].setText(c);
+            b[row][col]=c;
             count++;
-            if (b[row][col - 1].getText() == "") {
-                b[row][col - 1].setText(c);
+            indexes.add(i,row);
+            indexes.add(i+1,col);
+            i=i+2;
+            if (b[row][col - 1] == " - ") {
+                b[row][col - 1]=c;
                 count++;
+                indexes.add(i,row);
+                indexes.add(i+1,col-1);
+                i=i+2;
             }
 
-            if (b[row + 1][col].getText() == "") {
-                b[row + 1][col].setText(c);
+            if (b[row + 1][col] == " - ") {
+                b[row + 1][col]=c;
                 count++;
+                indexes.add(i,row+1);
+                indexes.add(i+1,col);
+                i=i+2;
             }
 
-            if (b[row][col + 1].getText() == "") {
-                b[row][col + 1].setText(c);
+            if (b[row][col + 1] == " - ") {
+                b[row][col + 1]=c;
                 count++;
+
+                indexes.add(i,row);
+                indexes.add(i+1,col+1);
+                i=i+2;
             }
 
         } else if (row == 5) {
-            b[row][col].setText(c);
+            b[row][col]=c;
             count++;
-            if (b[row][col - 1].getText() == "") {
-                b[row][col - 1].setText(c);
+
+            indexes.add(i,row);
+            indexes.add(i+1,col);
+            i=i+2;
+            if (b[row][col - 1] == " - ") {
+                b[row][col - 1]=c;
                 count++;
+
+                indexes.add(i,row);
+                indexes.add(i+1,col-1);
+                i=i+2;
             }
 
-            if (b[row - 1][col].getText() == "") {
-                b[row - 1][col].setText(c);
+            if (b[row - 1][col] == " - ") {
+                b[row - 1][col]=c;
                 count++;
+                indexes.add(i,row-1);
+                indexes.add(i+1,col);
+                i=i+2;
             }
 
-            if (b[row][col + 1].getText() == "") {
-                b[row][col + 1].setText(c);
+            if (b[row][col + 1] == " - ") {
+                b[row][col + 1]=c;
                 count++;
+                indexes.add(i,row);
+                indexes.add(i+1,col+1);
+                i=i+2;
             }
         } else if (col == 0) {
-            b[row][col].setText(c);
+            b[row][col]=c;
             count++;
-            if (b[row][col + 1].getText() == "") {
-                b[row][col + 1].setText(c);
+            indexes.add(i,row);
+            indexes.add(i+1,col);
+            i=i+2;
+            if (b[row][col + 1] == " - ") {
+                b[row][col + 1]=c;
                 count++;
+                indexes.add(i,row);
+                indexes.add(i+1,col+1);
+                i=i+2;
             }
-            if (b[row - 1][col].getText() == "") {
-                b[row - 1][col].setText(c);
+            if (b[row - 1][col] == " - ") {
+                b[row - 1][col]=c;
                 count++;
+                indexes.add(i,row-1);
+                indexes.add(i+1,col);
+                i=i+2;
             }
 
-            if (b[row + 1][col].getText() == "") {
-                b[row + 1][col].setText(c);
+            if (b[row + 1][col] == " - ") {
+                b[row + 1][col]=c;
                 count++;
+                indexes.add(i,row+1);
+                indexes.add(i+1,col);
+                i=i+2;
             }
 
         } else if (col == 5) {
-            b[row][col].setText(c);
+            b[row][col]=c;
             count++;
-            if (b[row][col - 1].getText() == "") {
-                b[row][col - 1].setText(c);
+            indexes.add(i,row);
+            indexes.add(i+1,col);
+            i=i+2;
+            if (b[row][col - 1] == " - ") {
+                b[row][col - 1]=c;
                 count++;
+                indexes.add(i,row);
+                indexes.add(i+1,col-1);
+                i=i+2;
             }
 
-            if (b[row - 1][col].getText() == "") {
-                b[row - 1][col].setText(c);
+            if (b[row - 1][col] == " - ") {
+                b[row - 1][col]=c;
                 count++;
+                indexes.add(i,row-1);
+                indexes.add(i+1,col);
+                i=i+2;
             }
 
-            if (b[row + 1][col].getText() == "") {
-                b[row + 1][col].setText(c);
+            if (b[row + 1][col] == " - ") {
+                b[row + 1][col]=c;
                 count++;
+                indexes.add(i,row+1);
+                indexes.add(i+1,col);
+                i=i+2;
             }
 
         } else {
-            b[row][col].setText(c);
+            b[row][col]=c;
             count++;
-            if (b[row][col - 1].getText() == "") {
-                b[row][col - 1].setText(c);
+            indexes.add(i,row);
+            indexes.add(i+1,col);
+            i=i+2;
+            if (b[row][col - 1] == " - ") {
+                b[row][col - 1]=c;
                 count++;
+                indexes.add(i,row);
+                indexes.add(i+1,col-1);
+                i=i+2;
             }
 
-            if (b[row - 1][col].getText() == "") {
-                b[row - 1][col].setText(c);
+            if (b[row - 1][col] == " - ") {
+                b[row - 1][col]=c;
                 count++;
+                indexes.add(i,row-1);
+                indexes.add(i+1,col);
+                i=i+2;
             }
 
-            if (b[row + 1][col].getText() == "") {
-                b[row + 1][col].setText(c);
+            if (b[row + 1][col] == " - ") {
+                b[row + 1][col]=c;
                 count++;
+                indexes.add(i,row+1);
+                indexes.add(i+1,col);
+                i=i+2;
             }
 
-            if (b[row][col + 1].getText() == "") {
-                b[row][col + 1].setText(c);
+            if (b[row][col + 1] == " - ") {
+                b[row][col + 1]=c+1;
                 count++;
+                indexes.add(i,row);
+                indexes.add(i+1,col+1);
+                i=i+2;
             }
 
         }
@@ -238,6 +362,12 @@ public class GameRules {
 
         }
         setCount(count);
+
+        System.out.println(indexes);
+
+        System.out.println("------------------");
+        System.out.println(getCount());
+        return indexes;
     }
 
 }

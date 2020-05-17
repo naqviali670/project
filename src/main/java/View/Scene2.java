@@ -58,7 +58,7 @@ public class Scene2 extends Application {
 
         for (i = 0; i < 6; i++) {
             for (j = 0; j < 6; j++) {
-                bf.actionGrid(b, i, j, stage, pagc);
+                gs.actionGrid(i, j, stage, pagc);
             }
         }
         for (i = 0; i < 6; i++) {

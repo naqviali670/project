@@ -26,83 +26,11 @@ import java.time.LocalTime;
  */
 public class ButtonFunctions {
     GameRules gr = new GameRules();
-    TurnSet ts = new TurnSet();
+
     int check;
 
-    /**
-     * It represents the Scene2 controller function.
-     * It calls business logic function from GameRules(model class) to set logic on each cell.
-     * It uses StoreData(model_class), calls functions of StoreData to store Game in Game table.
-     * After this, it changes second scene to first scene.
-     *
-     * @param b1    Button Array,  represents cells of the board.
-     * @param r     row number of specific cell.
-     * @param c1    column number of the specific cell.
-     * @param stage stage, created in the Scene1
-     * @param pagc  PlayerAndGameCreator object, to perform necessary functionality.
-     */
-    public void actionGrid(Button[][] b1, int r, int c1, Stage stage, PlayerAndGameCreator pagc) {
-        gr.setTurnSet(ts);
-        gr.setPlayerAndGameCreator(pagc);
-        int row, col;
-        row = r;
-        col = c1;
-        EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                try {
-                    gr.GridRules(b1, r, c1); // Business logic
-                } catch (Exception e) {
-                    Alert a = new Alert(Alert.AlertType.ERROR, "Cell is already filled", ButtonType.OK);
-                    a.show();
-                }
-                if (gr.getCount() == 36) //to store data
-                {
-                    pagc.getGame().setPlayer1Turn(pagc.getP1().getTurns());
-                    pagc.getGame().setPlayer2Turn(pagc.getP2().getTurns());
-                    StoreData sd = new StoreData();
-                    if (ts.getTurn() == 1) {
-                        Alert a = new Alert(Alert.AlertType.INFORMATION, pagc.getP2().getName() + " is the winner", ButtonType.OK);
-                        a.showAndWait();
-                        pagc.getGame().setWinner(pagc.getP2().getName());
-                        Logger.info("{} is the winner", pagc.getP2().getName());
-                        for (Player1 p : sd.getPlayer()) {
-
-                            if (p.equals(pagc.getP2())) {
-                                sd.updateData(p);
-
-                            }
-                        }
-                    } else {
-                        Alert a = new Alert(Alert.AlertType.INFORMATION, pagc.getP1().getName() + " is the winner", ButtonType.OK);
-                        a.show();
-                        pagc.getGame().setWinner(pagc.getP1().getName());
-                        Logger.info("{} is the winner", pagc.getP1().getName());
-                        for (Player1 p : sd.getPlayer()) {
-                            if (p.equals(pagc.getP1())) {
-                                sd.updateData(p);
-                                pagc.getGame().setWinner(pagc.getP1().getName());
-                            }
-                        }
-                    }
-                    sd.setGame(pagc.getGame());
 
 
-                    ts.setTurn(1);
-                    Scene1 fx = new Scene1();
-
-                    try {
-                        fx.start(stage);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-        };
-        b1[row][col].addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
-
-    }
 
     /**
      * It represents the Scene1 controller function.

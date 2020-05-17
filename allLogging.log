@@ -1,2 +1,10 @@
-2020-05-16 15:14:48 [JavaFX Application Thread] Control.ButtonFunctions.handle()
-INFO: You are tired now!
+2020-05-17 10:04:02 [JavaFX Application Thread] Model.Player1.<init>()
+INFO: kausar has X assigned name
+2020-05-17 10:04:02 [JavaFX Application Thread] Model.Player1.<init>()
+INFO: ali has O assigned name
+2020-05-17 10:04:11 [JavaFX Application Thread] Control.ButtonFunctions.handle()
+INFO: Players are ready for action!
+2020-05-17 10:04:36 [JavaFX Application Thread] Control.GridSetUp.handle()
+INFO: ali is the winner
+2020-05-17 10:04:40 [JavaFX Application Thread] Model.StoreData.setGame()
+INFO: Game data has been stored successfully!
