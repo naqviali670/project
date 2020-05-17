@@ -2,6 +2,7 @@ package Control;
 
 import Model.Player1;
 import Model.StoreData;
+import org.tinylog.Logger;
 
 import java.util.ArrayList;
 
@@ -19,6 +20,7 @@ public class WinnersResult {
      * @return Top 5 winners of the game in the form of ArrayList
      */
     public ArrayList<Player1> getWinners() {
+        Logger.info("Getting Top 5 winners.....!");
         int i = 0;
         for (Player1 p : sd.getPlayer()) {
             if (i == 5) {

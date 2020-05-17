@@ -38,11 +38,7 @@ public class Scene1 extends Application {
     public void start(Stage stage) throws Exception {
         ButtonFunctions bf = new ButtonFunctions();
         GridPane root = new GridPane();
-        root.setMinSize(600, 400);
-        root.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        root.setAlignment(Pos.TOP_CENTER);
-        root.setPadding(new Insets(60, 20, 20, 20));
-        root.setVgap(15);
+        rootStyling(root);
         Font defaultFOnt = new Font("TimesNewRoman", 15);
         Button start = new Button("Start");
         start.setMinSize(80, 60);
@@ -68,7 +64,6 @@ public class Scene1 extends Application {
         root.addRow(1, firstPlayer, t1);
         root.addRow(2, secondPlayer, t2);
         root.addRow(3, start, finish);
-
         bf.startAction(start, stage, t1, t2);
         bf.finishAction(finish, stage);
         Scene s = new Scene(root, 600, 400);
@@ -77,5 +72,17 @@ public class Scene1 extends Application {
         stage.show();
     }
 
+    /**
+     * It's function is to style the Layout.
+     *
+     * @param root layout object (in our case it's GridPane)
+     */
+    public void rootStyling(GridPane root) {
+        root.setMinSize(600, 400);
+        root.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        root.setAlignment(Pos.TOP_CENTER);
+        root.setPadding(new Insets(60, 20, 20, 20));
+        root.setVgap(15);
+    }
 
 }

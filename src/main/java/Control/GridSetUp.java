@@ -1,5 +1,4 @@
 package Control;
-
 import Model.GameRules;
 import Model.Player1;
 import Model.StoreData;
@@ -10,12 +9,13 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.tinylog.Logger;
-
 import java.util.ArrayList;
 
 /**
@@ -47,7 +47,6 @@ public class GridSetUp {
     public Button[][] getButtonArray() {
         return b;
     }
-
     /**
      * To style the passed button
      *
@@ -59,6 +58,17 @@ public class GridSetUp {
         button.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
     }
 
+    /**
+     * It represents the controller for Scene2(Second Scene).
+     * It assigns the functionality to buttons(cells) by using business logic from model class(GameRules).
+     * After all this, it uses model class(StoreData), to store and update Game in the database.
+     * Then it changes Second Scene(Scene2) back to first scene (Scene1).
+     *
+     * @param r     represents row number of the cell.
+     * @param c     represents column number of the cell.
+     * @param stage Created in the first scene, will be passed to Scene1 object for scene shift.
+     * @param pagc  (controller class)PlayerAndGameCreator object for further functionality.
+     */
     public void actionGrid(int r, int c, Stage stage, PlayerAndGameCreator pagc) {
 
         EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
@@ -72,8 +82,6 @@ public class GridSetUp {
                 }
                 if (b[r][c].getText() == "") {
                     ArrayList<Integer> indexes = gr.GridRules(r, c);
-
-
                     for (i = 0; i < indexes.size(); i = i + 2) {
 
                         if (gr.getCellData() == "X") {

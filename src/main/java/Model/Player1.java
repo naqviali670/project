@@ -1,6 +1,5 @@
 package Model;
 
-import lombok.NoArgsConstructor;
 import org.tinylog.Logger;
 
 import javax.persistence.Column;
@@ -80,7 +79,8 @@ public class Player1 {
 
     /**
      * To calculate or add the total turns of the player in the game.
-     * * @param turns Total turns of the player in the game.
+     *
+     * @param turns Total turns of the player in the game.
      */
     public void TurnCalculator(int turns) {
         this.turns = this.turns + turns;

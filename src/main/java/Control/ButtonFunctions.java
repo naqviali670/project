@@ -26,11 +26,7 @@ import java.time.LocalTime;
  */
 public class ButtonFunctions {
     GameRules gr = new GameRules();
-
     int check;
-
-
-
 
     /**
      * It represents the Scene1 controller function.

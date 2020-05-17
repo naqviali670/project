@@ -49,12 +49,13 @@ public class StoreData {
     public void setPlayer(Player1 player) {
         emf = Persistence.createEntityManagerFactory("Game-mysql");
         entityManager = emf.createEntityManager();
-        Player1 a = entityManager.find(Player1.class, "");
         if ((entityManager.find(Player1.class, player.getName())) == null) {
             entityManager.getTransaction().begin();
             entityManager.persist(player);
             entityManager.getTransaction().commit();
+            Logger.info(player.getName()+" has been added successfully!");
         }
+
         entityManager.close();
         emf.close();
     }
@@ -76,20 +77,19 @@ public class StoreData {
     /**
      * To update specific player record in the database
      *
-     * @param entity Player1(class_name) object (represents player whose record should be updated)
+     * @param player Player1(class_name) object (represents player whose record should be updated)
      */
-    public void updateData(Player1 entity) {
+    public void updateData(Player1 player) {
         emf = Persistence.createEntityManagerFactory("Game-mysql");
         entityManager = emf.createEntityManager();
         try {
             entityManager.getTransaction().begin();
             Query setParameter = entityManager.createQuery("UPDATE Player1 set wins = wins + 1 where name = :name")
 
-                    .setParameter("name", entity.getName());
-            System.out.println("13");
+                    .setParameter("name", player.getName());
             setParameter.executeUpdate();
-            System.out.println("14");
             entityManager.getTransaction().commit();
+            Logger.info(player.getName()+"'s wins has been updated successfully!");
         } catch (Exception ex) {
             System.out.println(ex);
         }

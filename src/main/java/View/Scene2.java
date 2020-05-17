@@ -38,7 +38,7 @@ public class Scene2 extends Application {
         Button[][] b = gs.getButtonArray();
         GridPane root = new GridPane();
         root.setAlignment(Pos.CENTER);
-        FileInputStream backgroundImage = new FileInputStream("background.BMP");
+        FileInputStream backgroundImage = new FileInputStream("src/main/resources/Background Images/background.BMP");
         Image image = new Image(backgroundImage);
         BackgroundImage bi = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT,
@@ -49,7 +49,7 @@ public class Scene2 extends Application {
         root.setBackground(background);
         Scene scene = new Scene(root, 600, 400);
 
-        int i = 0, j = 0, count = 0;
+        int i = 0, j = 0;
         for (i = 0; i < 6; i++) {
             for (j = 0; j < 6; j++) {
                 root.add(b[i][j], j, i);
@@ -59,13 +59,6 @@ public class Scene2 extends Application {
         for (i = 0; i < 6; i++) {
             for (j = 0; j < 6; j++) {
                 gs.actionGrid(i, j, stage, pagc);
-            }
-        }
-        for (i = 0; i < 6; i++) {
-            for (j = 0; j < 6; j++) {
-                if (b[i][j].getText().equals("X") || b[i][j].getText().equals("O")) {
-                    count++;
-                }
             }
         }
         stage.setScene(scene);
